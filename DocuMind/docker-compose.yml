@@ -1,0 +1,37 @@
+services:
+  # The Vector Database (Postgres + pgvector)
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: documind_db
+    environment:
+      POSTGRES_USER: documind
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: documind_local
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  # Redis for Async Task Queue (Celery)
+  redis:
+    image: redis:alpine
+    container_name: documind_redis
+    ports:
+      - "6379:6379"
+    restart: always
+
+  # Optional: PGAdmin to view your vectors visually
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: documind_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@documind.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

@@ -1,0 +1,25 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+asyncpg
+alembic
+pydantic
+pydantic-settings
+python-dotenv
+# Vector Database
+pgvector
+# AI & RAG
+langchain
+langchain-openai
+langchain-community
+langchain-postgres
+psycopg2-binary
+# Processing
+tiktoken
+pypdf
+# Task Queue
+celery
+redis
+# Utils
+python-multipart
+requests
